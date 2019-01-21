@@ -14,6 +14,8 @@ class GameScene: SKScene {
     var ball = SKSpriteNode()
     var enemy = SKSpriteNode()
     var main = SKSpriteNode()
+    var enemyPoint = SKLabelNode(fontNamed: "ArialMT")
+    var mainPoint = SKLabelNode(fontNamed: "ArialMT")
     
     override func didMove(to view: SKView) {
         ball = self.childNode(withName: "ball") as! SKSpriteNode
@@ -43,5 +45,16 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         enemy.run(SKAction.moveTo(x: ball.position.x, duration: 1))
+        if(ball.position.y < -580){
+            var value = Int(enemyPoint.text!)!
+            value += 1
+            enemyPoint.text  = "Points: " + String(value)
+            enemyPoint.position = CGPoint(x: -300, y:620)
+        }else if(ball.position.y > 580){
+            var value = Int(mainPoint.text!)!
+            value += 1
+            mainPoint.text  = "Points: " + String(value)
+            mainPoint.position = CGPoint(x: -300, y: -620)
+        }
     }
 }
